@@ -28,11 +28,7 @@ int main(int argc, char **argv) {
       return 1;
     }
   } else {
-    stdin_or_f = fopen("/dev/stdin", "r");
-    if (stdin_or_f == NULL) {
-      perror("Insane environment (/dev/stdin cannot be opened)");
-      return 1;
-    }
+    stdin_or_f = stdin;
   }
   while (true) {
     int waitingtoadd = 0;

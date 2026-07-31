@@ -13,6 +13,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include <errno.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -39,10 +40,12 @@ int main(int argc, char **argv) {
     int waitingtopow = 0;
     double topow = 0;
     double tonrt = 0;
-    double result = 0;
+    double result = nan("");
 
     char input[2048];
-    fgets(input, sizeof(input), stdin_or_f);
+    if (fgets(input, sizeof(input), stdin_or_f) == NULL) {
+      return 0;
+    }
 
     fflush(stdout);
 
@@ -73,23 +76,38 @@ int main(int argc, char **argv) {
       } else {
         number = strtod(token, &ptr);
 
+        if (errno == ERANGE) {
+          fprintf(stderr, "[ERROR]: out of range\n");
+          return 1;
+        }
+
         if (token == ptr) {
           fprintf(stderr, "[ERROR]: bad input\n");
           return 1;
         }
 
         if (waitingtoadd == 1) {
+          if (isnan(result)) {
+            result = 0;
+          }
           result = result + number;
         } else if (waitingtosub == 1) {
-          result = result - number;
-        } else if (waitingtomul == 1) {
+          if (isnan(result)) {
+            result = 0;
+          }
           if (result == 0) {
+            result = number;
+          } else {
+            result = result - number;
+          }
+        } else if (waitingtomul == 1) {
+          if (result == 0 || isnan(result)) {
             result = number;
           } else {
             result = result * number;
           }
         } else if (waitingtodiv == 1) {
-          if (result == 0) {
+          if (result == 0 || isnan(result)) {
             result = number;
           } else {
             result = result / number;
@@ -113,7 +131,9 @@ int main(int argc, char **argv) {
       token = strtok(NULL, " \n\r");
     }
 
-    printf("%f\n", result);
+    if (isnan(result) == 0) {
+      printf("%f\n", result);
+    }
 
     if (feof(stdin_or_f)) {
       return 0;

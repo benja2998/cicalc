@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
         }
       }
 
-      token = strtok(NULL, " \n");
+      token = strtok(NULL, " \n\r");
     }
 
     printf("%f\n", result);

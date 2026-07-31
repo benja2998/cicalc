@@ -2,6 +2,7 @@
 cicalc is an interactive calculator written in C. It can handle decimals due to it using `double`s.
 ## Motivation
 GNU bc is the common tool used for calculations. Unfortunately, it is thousands of lines of code and includes a whole scripting language.
+Other alternatives like Qalculate require running a heavy graphical interface. Calculators don't have to be this complex, so I decided I could make better software than these people.
 ## Running
 Run `make` to compile it and `make install` to install it.
 ## Syntax

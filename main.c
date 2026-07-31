@@ -1,0 +1,106 @@
+/*
+  cicalc - C Interactive CALCulator
+  Copyright (C) 2026 benja2998
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+#include <math.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+  while (true) {
+    int waitingtoadd = 0;
+    int waitingtosub = 0;
+    int waitingtomul = 0;
+    int waitingtodiv = 0;
+    int waitingtosqr = 0;
+    int waitingtopow = 0;
+    double topow = 0;
+    double tosqr = 0;
+    double result = 0;
+
+    char input[2048];
+    fgets(input, 1024, stdin); // be extra memory safe
+
+    fflush(stdout);
+
+    char *token = strtok(input, " \n");
+
+    while (token != NULL) {
+      char *ptr = NULL;
+      double number = 0;
+
+      if (strcmp(token, "add") == 0) {
+        // next numbers will be added one by one
+        waitingtoadd = 1;
+      } else if (strcmp(token, "sub") == 0) {
+        // next numbers will be substracted one by one
+        waitingtosub = 1;
+      } else if (strcmp(token, "mul") == 0) {
+        // next numbers will be multiplied one by one
+        waitingtomul = 1;
+      } else if (strcmp(token, "div") == 0) {
+        // next numbers will be divided one by one
+        waitingtodiv = 1;
+      } else if (strcmp(token, "sqr") == 0) {
+        waitingtosqr = 1;
+      } else if (strcmp(token, "pow") == 0) {
+        waitingtopow = 1;
+      } else {
+        number = strtod(token, &ptr);
+
+        if (token == ptr) {
+          fprintf(stderr, "[ERROR]: bad input\n");
+          return 1;
+        }
+
+        if (waitingtoadd == 1) {
+          result = result + number;
+        } else if (waitingtosub == 1) {
+          result = result - number;
+        } else if (waitingtomul == 1) {
+          if (result == 0) {
+            result = number;
+          } else {
+            result = result * number;
+          }
+        } else if (waitingtodiv == 1) {
+          if (result == 0) {
+            result = number;
+          } else {
+            result = result / number;
+          }
+        } else if (waitingtosqr == 1) {
+          tosqr = number;
+          waitingtosqr = 2;
+        } else if (waitingtosqr == 2) {
+          result = pow(tosqr, 1.0 / number);
+        } else if (waitingtopow == 1) {
+          topow = number;
+          waitingtopow = 2;
+        } else if (waitingtopow == 2) {
+          result = pow(topow, number);
+        } else {
+          fprintf(stderr, "[ERROR]: bad input\n");
+          return 1;
+        }
+      }
+
+      token = strtok(NULL, " \n");
+    }
+
+    printf("%f\n", result);
+  }
+}

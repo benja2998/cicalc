@@ -25,11 +25,13 @@ int main(int argc, char **argv) {
     stdin_or_f = fopen(argv[1], "r");
     if (stdin_or_f == NULL) {
       perror("Failed to open file");
+      return 1;
     }
   } else {
     stdin_or_f = fopen("/dev/stdin", "r");
     if (stdin_or_f == NULL) {
       perror("Insane environment (/dev/stdin cannot be opened)");
+      return 1;
     }
   }
   while (true) {

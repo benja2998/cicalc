@@ -32,7 +32,7 @@ int main(void) {
     double result = 0;
 
     char input[2048];
-    fgets(input, 1024, stdin); // be extra memory safe
+    fgets(input, sizeof(input), stdin);
 
     fflush(stdout);
 
@@ -104,6 +104,10 @@ int main(void) {
     }
 
     printf("%f\n", result);
+
+    if (feof(stdin)) {
+      return 0;
+    }    
   }
   return 0;
 }

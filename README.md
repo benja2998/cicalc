@@ -24,10 +24,6 @@ Same as `nrt`, but it calculates the exponentiation of the number. For example, 
 ### quit
 Will quit cicalc.
 ## Scripting
-cicalc can be scripted using basic shell functionality. Rather than giving a script as an argument, you'd input it like this:
-```bash
-cicalc < script.cicalc
-```
-IMPORTANT: The script must end with `quit`. Otherwise, cicalc will print zeroes forever!
+Just pipe a command into cicalc.
 ## About the limitations
 While this software certainly has more limitations than `bc`, it works very well for the kind of simple decimal math shell scripts actually use `bc` for.

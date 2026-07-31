@@ -74,7 +74,11 @@ int main(int argc, char **argv) {
       } else if (strcmp(token, "pow") == 0) {
         waitingtopow = 1;
       } else {
-        number = strtod(token, &ptr);
+        if (strcmp(token, "pi") == 0) {
+          number = acos(-1.0);
+        } else {
+          number = strtod(token, &ptr);
+        }
 
         if (errno == ERANGE) {
           fprintf(stderr, "[ERROR]: out of range\n");

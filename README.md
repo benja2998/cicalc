@@ -6,7 +6,7 @@ Other alternatives like GNOME Calculator require running a heavy graphical inter
 ## Running
 Run `make` to compile it and `make install` to install it.
 ## Syntax
-The syntax is `OPERATOR [NUMBERS...]`.
+The syntax is `OPERATOR [NUMBERS...]`. However, you could use `pi` instead of directly using a number to use pi.
 You can use the following operators.
 ### add
 Add the numbers following this operator.

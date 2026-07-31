@@ -27,4 +27,4 @@ cicalc can be scripted using basic shell functionality. Rather than giving a scr
 ```bash
 cicalc < script.cicalc
 ```
-IMPORTANT: The script must end with `quit`. Otherwise, cicalc will go on forever!
+IMPORTANT: The script must end with `quit`. Otherwise, cicalc will print zeroes forever!

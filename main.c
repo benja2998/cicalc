@@ -19,7 +19,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(void) {
+int main(int argc, char **argv) {
+  FILE *stdin_or_f;
+  if (argc >= 2) {
+    stdin_or_f = fopen(argv[1], "r");
+    if (stdin_or_f == NULL) {
+      perror("Failed to open file");
+    }
+  } else {
+    stdin_or_f = fopen("/dev/stdin", "r");
+    if (stdin_or_f == NULL) {
+      perror("Insane environment (/dev/stdin cannot be opened)");
+    }
+  }
   while (true) {
     int waitingtoadd = 0;
     int waitingtosub = 0;
@@ -32,7 +44,7 @@ int main(void) {
     double result = 0;
 
     char input[2048];
-    fgets(input, sizeof(input), stdin);
+    fgets(input, sizeof(input), stdin_or_f);
 
     fflush(stdout);
 
@@ -43,7 +55,7 @@ int main(void) {
       double number = 0;
 
       if (strcmp(token, "quit") == 0) {
-	return 0;
+        return 0;
       } else if (strcmp(token, "add") == 0) {
         // next numbers will be added one by one
         waitingtoadd = 1;
@@ -105,9 +117,9 @@ int main(void) {
 
     printf("%f\n", result);
 
-    if (feof(stdin)) {
+    if (feof(stdin_or_f)) {
       return 0;
-    }    
+    }
   }
   return 0;
 }

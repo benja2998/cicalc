@@ -24,6 +24,7 @@ Same as `nrt`, but it calculates the exponentiation of the number. For example, 
 ### quit
 Will quit cicalc.
 ## Scripting
-Just pipe a command into cicalc.
+Just pipe a command into cicalc. A script file can also be provided as an argument.
+If the script file ends with a newline, it will output a 0 at the end. End the script file with `quit` if having no newline at the end is impossible.
 ## About the limitations
 While this software certainly has more limitations than `bc`, it works very well for the kind of simple decimal math shell scripts actually use `bc` for.

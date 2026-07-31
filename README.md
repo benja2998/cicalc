@@ -18,7 +18,7 @@ Multiply the numbers following this operator.
 Divide the numbers following this operator
 ### nrt
 Calculate the Nth root of the number following this operator. For example, `nrt 4 2` to get the square root of 4, where 2 is N.
-Limitation: May not work with negative index
+Limitation: May not work with negative index if base is negative too
 ### pow
 Same as `nrt`, but it calculates the exponentiation of the number. For example, `pow 2 2` to get 2 to the power of 2.
 ### quit

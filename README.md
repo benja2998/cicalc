@@ -29,3 +29,5 @@ cicalc can be scripted using basic shell functionality. Rather than giving a scr
 cicalc < script.cicalc
 ```
 IMPORTANT: The script must end with `quit`. Otherwise, cicalc will print zeroes forever!
+## About the limitations
+While this software certainly has more limitations than `bc`, it works very well for the kind of simple decimal math shell scripts actually use `bc` for.

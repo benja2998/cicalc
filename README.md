@@ -15,11 +15,11 @@ Substract the numbers following this operator.
 Multiply the numbers following this operator.
 ### div
 Divide the numbers following this operator
-### sqr
-Calculate the root of the number following this operator. For example, `sqr 4 2` to get the square root of 4, where 2 is the index.
+### nrt
+Calculate the Nth root of the number following this operator. For example, `nrt 4 2` to get the square root of 4, where 2 is N.
 Limitation: May not work with negative index
 ### pow
-Same as `sqr`, but it calculates the exponentiation of the number. For example, `pow 2 2` to get 2 to the power of 2.
+Same as `nrt`, but it calculates the exponentiation of the number. For example, `pow 2 2` to get 2 to the power of 2.
 ### quit
 Will quit cicalc.
 ## Scripting

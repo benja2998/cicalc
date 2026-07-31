@@ -25,10 +25,10 @@ int main(void) {
     int waitingtosub = 0;
     int waitingtomul = 0;
     int waitingtodiv = 0;
-    int waitingtosqr = 0;
+    int waitingtonrt = 0;
     int waitingtopow = 0;
     double topow = 0;
-    double tosqr = 0;
+    double tonrt = 0;
     double result = 0;
 
     char input[2048];
@@ -56,8 +56,8 @@ int main(void) {
       } else if (strcmp(token, "div") == 0) {
         // next numbers will be divided one by one
         waitingtodiv = 1;
-      } else if (strcmp(token, "sqr") == 0) {
-        waitingtosqr = 1;
+      } else if (strcmp(token, "nrt") == 0) {
+        waitingtonrt = 1;
       } else if (strcmp(token, "pow") == 0) {
         waitingtopow = 1;
       } else {
@@ -84,11 +84,11 @@ int main(void) {
           } else {
             result = result / number;
           }
-        } else if (waitingtosqr == 1) {
-          tosqr = number;
-          waitingtosqr = 2;
-        } else if (waitingtosqr == 2) {
-          result = pow(tosqr, 1.0 / number);
+        } else if (waitingtonrt == 1) {
+          tonrt = number;
+          waitingtonrt = 2;
+        } else if (waitingtonrt == 2) {
+          result = pow(tonrt, 1.0 / number);
         } else if (waitingtopow == 1) {
           topow = number;
           waitingtopow = 2;

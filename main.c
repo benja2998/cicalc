@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
 
     fflush(stdout);
 
-    char *token = strtok(input, " \n");
+    char *token = strtok(input, " \n\r");
 
     while (token != NULL) {
       char *ptr = NULL;

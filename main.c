@@ -42,7 +42,9 @@ int main(void) {
       char *ptr = NULL;
       double number = 0;
 
-      if (strcmp(token, "add") == 0) {
+      if (strcmp(token, "quit") == 0) {
+	return 0;
+      } else if (strcmp(token, "add") == 0) {
         // next numbers will be added one by one
         waitingtoadd = 1;
       } else if (strcmp(token, "sub") == 0) {
@@ -103,4 +105,5 @@ int main(void) {
 
     printf("%f\n", result);
   }
+  return 0;
 }

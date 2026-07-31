@@ -20,8 +20,11 @@ Calculate the root of the number following this operator. For example, `sqr 4 2`
 Limitation: May not work with negative index
 ### pow
 Same as `sqr`, but it calculates the exponentiation of the number. For example, `pow 2 2` to get 2 to the power of 2.
+### quit
+Will quit cicalc.
 ## Scripting
 cicalc can be scripted using basic shell functionality. Rather than giving a script as an argument, you'd input it like this:
 ```bash
 cicalc < script.cicalc
 ```
+IMPORTANT: The script must end with `quit`. Otherwise, cicalc will go on forever!

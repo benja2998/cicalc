@@ -5,11 +5,16 @@ INSTDIR ?= /usr/local/bin
 
 build: main.c format
 	$(CC) *.c -o cicalc -pedantic -Wall -Werror -Wextra -O3 -march=native -lm -std=c99
+	cicalc --test
 
 format:
 	clang-format -i *.c
+	clang-format -i *.h
 
-install: cicalc
+test:
+	./cicalc --test
+
+install: cicalc test
 	install -d $(INSTDIR)
 	ln -sf $(CURDIR)/cicalc $(INSTDIR)/cicalc
 

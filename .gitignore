@@ -1,4 +1,5 @@
 *.o
+cicalc.results_test
 *~
 #*#
 cicalc

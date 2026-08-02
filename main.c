@@ -13,6 +13,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include "test.h"
 #include <errno.h>
 #include <math.h>
 #include <stdbool.h>
@@ -26,11 +27,19 @@ main (int argc, char **argv)
   FILE *stdin_or_f;
   if (argc >= 2)
     {
-      stdin_or_f = fopen (argv[1], "r");
-      if (stdin_or_f == NULL)
+      if (strcmp (argv[1], "--test") == 0)
         {
-          perror ("Failed to open file");
-          return 1;
+          int result = test_cicalc ();
+          return result;
+        }
+      else
+        {
+          stdin_or_f = fopen (argv[1], "r");
+          if (stdin_or_f == NULL)
+            {
+              perror ("Failed to open file");
+              return 1;
+            }
         }
     }
   else

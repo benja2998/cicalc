@@ -176,5 +176,7 @@ test_cicalc (void)
       printf ("\033[31mfail! expected 25.000000, got %s\033[0m\n", s);
     }
 
+  remove ("cicalc.results_test");
+
   return exit_code;
 }

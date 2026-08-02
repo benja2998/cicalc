@@ -23,6 +23,8 @@ Limitation: May not work with negative index if base is negative too
 Same as `nrt`, but it calculates the exponentiation of the number. For example, `pow 2 2` to get 2 to the power of 2.
 ### quit
 Will quit cicalc.
+## Command-line usage
+Run `cicalc --help` to view usage
 ## Scripting
 Just pipe a command into cicalc. A script file can also be provided as an argument.
 ## About the limitations

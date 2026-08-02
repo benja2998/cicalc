@@ -32,6 +32,14 @@ main (int argc, char **argv)
           int result = test_cicalc ();
           return result;
         }
+      else if (strcmp (argv[1], "--help") == 0)
+        {
+          printf ("Usage: cicalc [filename or option]\n"
+                  "Options:\n"
+                  "--help\t\tshow this help message\n"
+                  "--test\t\trun tests\n");
+          return 0;
+        }
       else
         {
           stdin_or_f = fopen (argv[1], "r");

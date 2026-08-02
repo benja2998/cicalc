@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int
-test_cicalc (void)
+test_cicalc (const char *argv0)
 {
   char s[1024];
   FILE *fptr;
@@ -14,9 +14,11 @@ test_cicalc (void)
   int pow_failed = 0;
   int exit_code = 0;
 
+  setenv ("CICALC", argv0, 1);
+
   printf ("Testing add...\t\t");
 
-  system ("echo \"add 5.5 5.5\" | ./cicalc > cicalc.results_test");
+  system ("echo \"add 5.5 5.5\" | \"$CICALC\" > cicalc.results_test");
 
   fptr = fopen ("cicalc.results_test", "r");
   if (fptr == NULL)
@@ -43,7 +45,7 @@ test_cicalc (void)
 
   printf ("Testing sub...\t\t");
 
-  system ("echo \"sub 5.5 .5\" | ./cicalc > cicalc.results_test");
+  system ("echo \"sub 5.5 .5\" | \"$CICALC\" > cicalc.results_test");
 
   fptr = fopen ("cicalc.results_test", "r");
   if (fptr == NULL)
@@ -70,7 +72,7 @@ test_cicalc (void)
 
   printf ("Testing mul...\t\t");
 
-  system ("echo \"mul 2.5 2\" | ./cicalc > cicalc.results_test");
+  system ("echo \"mul 2.5 2\" | \"$CICALC\" > cicalc.results_test");
 
   fptr = fopen ("cicalc.results_test", "r");
   if (fptr == NULL)
@@ -97,7 +99,7 @@ test_cicalc (void)
 
   printf ("Testing div...\t\t");
 
-  system ("echo \"div 5 2.5\" | ./cicalc > cicalc.results_test");
+  system ("echo \"div 5 2.5\" | \"$CICALC\" > cicalc.results_test");
 
   fptr = fopen ("cicalc.results_test", "r");
   if (fptr == NULL)
@@ -124,7 +126,7 @@ test_cicalc (void)
 
   printf ("Testing nrt...\t\t");
 
-  system ("echo \"nrt 25 2\" | ./cicalc > cicalc.results_test");
+  system ("echo \"nrt 25 2\" | \"$CICALC\" > cicalc.results_test");
 
   fptr = fopen ("cicalc.results_test", "r");
   if (fptr == NULL)
@@ -151,7 +153,7 @@ test_cicalc (void)
 
   printf ("Testing pow...\t\t");
 
-  system ("echo \"pow 5 2\" | ./cicalc > cicalc.results_test");
+  system ("echo \"pow 5 2\" | \"$CICALC\" > cicalc.results_test");
 
   fptr = fopen ("cicalc.results_test", "r");
   if (fptr == NULL)

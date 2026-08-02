@@ -29,7 +29,7 @@ main (int argc, char **argv)
     {
       if (strcmp (argv[1], "--test") == 0)
         {
-          int result = test_cicalc ();
+          int result = test_cicalc (argv[0]);
           return result;
         }
       else if (strcmp (argv[1], "--help") == 0)

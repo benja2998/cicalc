@@ -38,7 +38,7 @@ test_cicalc (void)
     }
   else
     {
-      printf ("\033[31mfail!\033[0m\n");
+      printf ("\033[31mfail! expected 11.000000, got %s\033[0m\n", s);
     }
 
   printf ("Testing sub...\t\t");
@@ -65,7 +65,7 @@ test_cicalc (void)
     }
   else
     {
-      printf ("\033[31mfail!\033[0m\n");
+      printf ("\033[31mfail! expected 5.000000, got %s\033[0m\n", s);
     }
 
   printf ("Testing mul...\t\t");
@@ -92,7 +92,7 @@ test_cicalc (void)
     }
   else
     {
-      printf ("\033[31mfail!\033[0m\n");
+      printf ("\033[31mfail! expected 5.000000, got %s\033[0m\n", s);
     }
 
   printf ("Testing div...\t\t");
@@ -119,7 +119,7 @@ test_cicalc (void)
     }
   else
     {
-      printf ("\033[31mfail!\033[0m\n");
+      printf ("\033[31mfail! expected 2.000000, got %s\033[0m\n", s);
     }
 
   printf ("Testing nrt...\t\t");
@@ -146,7 +146,7 @@ test_cicalc (void)
     }
   else
     {
-      printf ("\033[31mfail!\033[0m\n");
+      printf ("\033[31mfail! expected 5.000000, got %s\033[0m\n", s);
     }
 
   printf ("Testing pow...\t\t");
@@ -173,7 +173,7 @@ test_cicalc (void)
     }
   else
     {
-      printf ("\033[31mfail!\033[0m\n");
+      printf ("\033[31mfail! expected 25.000000, got %s\033[0m\n", s);
     }
 
   return exit_code;

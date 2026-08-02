@@ -4,7 +4,7 @@ ASSETDIR ?= $(CURDIR)
 INSTDIR ?= /usr/local/bin
 
 build: main.c format
-	$(CC) *.c -o cicalc -pedantic -Wall -Werror -Wextra -O3 -march=native -lm -std=c99
+	$(CC) *.c -o cicalc -pedantic -Wall -Werror -Wextra -O3 -march=native -lm -std=gnu99
 	./cicalc --test
 
 format:

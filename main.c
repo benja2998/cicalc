@@ -30,6 +30,15 @@ main (int argc, char **argv)
       if (strcmp (argv[1], "--test") == 0)
         {
           int result = test_cicalc (argv[0]);
+
+          if (result == 1)
+            {
+              fprintf (stderr,
+                       "You've found one or more bugs!\n"
+                       "If you're a user, report these at:\n"
+                       "https://codeberg.org/benja2998/cicalc/issues\n");
+            }
+
           return result;
         }
       else if (strcmp (argv[1], "--help") == 0)

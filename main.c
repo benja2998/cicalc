@@ -34,10 +34,11 @@ main (int argc, char **argv)
         }
       else if (strcmp (argv[1], "--help") == 0)
         {
-          printf ("Usage: cicalc [filename or option]\n"
+          printf ("Usage: %s [filename or option]\n"
                   "Options:\n"
                   "--help\t\tshow this help message\n"
-                  "--test\t\trun tests\n");
+                  "--test\t\trun tests\n",
+                  argv[0]);
           return 0;
         }
       else

@@ -14,7 +14,7 @@ test_cicalc (void)
   int pow_failed = 0;
   int exit_code = 0;
 
-  printf ("Testing addition... ");
+  printf ("Testing add...\t\t");
 
   system ("echo \"add 5.5 5.5\" | ./cicalc > cicalc.results_test");
 
@@ -34,14 +34,14 @@ test_cicalc (void)
 
   if (add_failed == 0)
     {
-      printf ("pass\n");
+      printf ("\033[32mpass\033[0m\n");
     }
   else
     {
-      printf ("fail!\n");
+      printf ("\033[31mfail!\033[0m\n");
     }
 
-  printf ("Testing subtraction... ");
+  printf ("Testing sub...\t\t");
 
   system ("echo \"sub 5.5 .5\" | ./cicalc > cicalc.results_test");
 
@@ -61,14 +61,14 @@ test_cicalc (void)
 
   if (sub_failed == 0)
     {
-      printf ("pass\n");
+      printf ("\033[32mpass\033[0m\n");
     }
   else
     {
-      printf ("fail!\n");
+      printf ("\033[31mfail!\033[0m\n");
     }
 
-  printf ("Testing multiplication... ");
+  printf ("Testing mul...\t\t");
 
   system ("echo \"mul 2.5 2\" | ./cicalc > cicalc.results_test");
 
@@ -88,14 +88,14 @@ test_cicalc (void)
 
   if (mul_failed == 0)
     {
-      printf ("pass\n");
+      printf ("\033[32mpass\033[0m\n");
     }
   else
     {
-      printf ("fail!\n");
+      printf ("\033[31mfail!\033[0m\n");
     }
 
-  printf ("Testing division... ");
+  printf ("Testing div...\t\t");
 
   system ("echo \"div 5 2.5\" | ./cicalc > cicalc.results_test");
 
@@ -115,14 +115,14 @@ test_cicalc (void)
 
   if (div_failed == 0)
     {
-      printf ("pass\n");
+      printf ("\033[32mpass\033[0m\n");
     }
   else
     {
-      printf ("fail!\n");
+      printf ("\033[31mfail!\033[0m\n");
     }
 
-  printf ("Testing N root... ");
+  printf ("Testing nrt...\t\t");
 
   system ("echo \"nrt 25 2\" | ./cicalc > cicalc.results_test");
 
@@ -142,14 +142,14 @@ test_cicalc (void)
 
   if (nrt_failed == 0)
     {
-      printf ("pass\n");
+      printf ("\033[32mpass\033[0m\n");
     }
   else
     {
-      printf ("fail!\n");
+      printf ("\033[31mfail!\033[0m\n");
     }
 
-  printf ("Testing exponentiation... ");
+  printf ("Testing pow...\t\t");
 
   system ("echo \"pow 5 2\" | ./cicalc > cicalc.results_test");
 
@@ -169,11 +169,11 @@ test_cicalc (void)
 
   if (pow_failed == 0)
     {
-      printf ("pass\n");
+      printf ("\033[32mpass\033[0m\n");
     }
   else
     {
-      printf ("fail!\n");
+      printf ("\033[31mfail!\033[0m\n");
     }
 
   return exit_code;

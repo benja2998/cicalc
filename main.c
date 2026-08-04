@@ -13,6 +13,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include "math.h"
 #include "test.h"
 #include <errno.h>
 #include <math.h>
@@ -125,26 +126,7 @@ main (int argc, char **argv)
             }
           else
             {
-              if (strcmp (token, "pi") == 0)
-                {
-                  number = acos (-1.0);
-                }
-              else
-                {
-                  number = strtod (token, &ptr);
-                }
-
-              if (errno == ERANGE)
-                {
-                  fprintf (stderr, "[ERROR]: out of range\n");
-                  return 1;
-                }
-
-              if (token == ptr)
-                {
-                  fprintf (stderr, "[ERROR]: bad input\n");
-                  return 1;
-                }
+              number = token_to_number (number, ptr, token);
 
               if (waitingtoadd == 1)
                 {

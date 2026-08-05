@@ -1,6 +1,7 @@
 #define NOB_IMPLEMENTATION
 #include "nob.h"
 #include <errno.h>
+#include <libgen.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -10,14 +11,21 @@ main (int argc, char **argv)
 {
   if (argc < 2)
     {
-      puts ("Usage: ./nob [build/install-sys/install-user]");
-      return 1;
+      puts ("Usage: ./nob [build/(un)install-sys/(un)install-user]");
+      return 0;
     }
 
   NOB_GO_REBUILD_URSELF (argc, argv);
 
   if (strcmp (argv[1], "install-sys") == 0)
     {
+      Nob_Cmd cmd0 = { 0 };
+
+      nob_cmd_append (&cmd0, "install", "-d", "/usr/local/bin",
+                      "/usr/local/share/man/man1");
+      if (!nob_cmd_run (&cmd0))
+        return 1;
+
       char buf[1024];
       char *cwd = getcwd (buf, 1023);
       char cicalc_bin[1024];
@@ -74,12 +82,56 @@ main (int argc, char **argv)
         {
           return 1;
         }
+
+      Nob_Cmd cmd0 = { 0 };
+
+      nob_cmd_append (&cmd0, "install", "-d", dirname (install_cb),
+                      dirname (install_cm));
+      if (!nob_cmd_run (&cmd0))
+        return 1;
+
       Nob_Cmd cmd1 = { 0 };
       nob_cmd_append (&cmd1, "ln", "-sf", cicalc_bin, install_cb);
       if (!nob_cmd_run (&cmd1))
         return 1;
       Nob_Cmd cmd2 = { 0 };
       nob_cmd_append (&cmd2, "ln", "-sf", cicalc_man, install_cm);
+      if (!nob_cmd_run (&cmd2))
+        return 1;
+    }
+  else if (strcmp (argv[1], "uninstall-sys") == 0)
+    {
+      Nob_Cmd cmd1 = { 0 };
+      nob_cmd_append (&cmd1, "rm", "-f", "/usr/local/bin/cicalc");
+      if (!nob_cmd_run (&cmd1))
+        return 1;
+      Nob_Cmd cmd2 = { 0 };
+      nob_cmd_append (&cmd2, "rm", "-f", "/usr/local/share/man/man1/cicalc.1");
+      if (!nob_cmd_run (&cmd2))
+        return 1;
+    }
+  else if (strcmp (argv[1], "uninstall-user") == 0)
+    {
+      char *home = getenv ("HOME");
+      char install_cb[1024];
+      int written3 = snprintf (install_cb, 1023, "%s/.local/bin/cicalc", home);
+
+      char install_cm[1024];
+      int written4 = snprintf (install_cm, 1023,
+                               "%s/.local/share/man/man1/cicalc.1", home);
+
+      if (written3 < 0 || written4 < 0)
+        {
+          perror ("Error");
+          return 1;
+        }
+
+      Nob_Cmd cmd1 = { 0 };
+      nob_cmd_append (&cmd1, "rm", "-f", install_cb);
+      if (!nob_cmd_run (&cmd1))
+        return 1;
+      Nob_Cmd cmd2 = { 0 };
+      nob_cmd_append (&cmd2, "rm", "-f", install_cm);
       if (!nob_cmd_run (&cmd2))
         return 1;
     }

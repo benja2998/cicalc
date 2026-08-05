@@ -1,0 +1,36 @@
+.TH CICALC 1
+.SH NAME
+cicalc \- C Interactive CALCulator
+.SH SYNOPSIS
+.B cicalc
+[filename or option]
+.SH DESCRIPTION
+.B cicalc
+is a calculator written in C.  It can read commands from a file or stdin.
+.SH OPTIONS
+.TP
+.BR \-\-test\fR
+Run tests.
+.SH OPERATORS
+cicalc accepts the following operators:
+.TP
+.BR add\fR
+Add the numbers following it in the expression one by one.
+.TP
+.BR sub\fR
+Substract the numbers following it in the expression one by one.
+.TP
+.BR mul\fR
+Multiply the numbers following it in the expression one by one.
+.TP
+.BR div\fR
+Divide the numbers following it in the expression one by one.
+.TP
+.BR nrt\fR
+Get the Nth root of the number following this operator.
+.TP
+.BR pow\fR
+Same as nrt, but it calculates the exponentiation of the number.
+.TP
+.BR quit\fR
+Exit cicalc

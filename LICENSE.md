@@ -1,3 +1,5 @@
+The license below does not apply to nob.h
+
 # GNU GENERAL PUBLIC LICENSE
 
 Version 3, 29 June 2007

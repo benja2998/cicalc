@@ -1,5 +1,7 @@
 *.o
 cicalc_script
+*.old
+nob
 *~
 #*#
 cicalc

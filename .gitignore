@@ -1,5 +1,5 @@
 *.o
-cicalc.results_test
+cicalc_script
 *~
 #*#
 cicalc

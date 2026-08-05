@@ -33,8 +33,8 @@ token_to_number (double number, char *ptr, char *token)
   return number;
 }
 
-void
-perform_calculation (FILE *stdin_or_f)
+double
+perform_calculation (FILE *stdin_or_f, int print)
 {
   int waitingtoadd = 0;
   int waitingtosub = 0;
@@ -49,7 +49,7 @@ perform_calculation (FILE *stdin_or_f)
   char input[2048];
   if (fgets (input, sizeof (input), stdin_or_f) == NULL)
     {
-      exit (0);
+      return 1;
     }
 
   fflush (stdout);
@@ -170,13 +170,29 @@ perform_calculation (FILE *stdin_or_f)
       token = strtok (NULL, " \n\r");
     }
 
-  if (isnan (result) == 0)
+  switch (print)
     {
-      printf ("%f\n", result);
-    }
+    case 0:
+      if (feof (stdin_or_f) != 0)
+        {
+          return result;
+        }
+      else
+        {
+          return result;
+        }
+      break;
+    case 1:
+      if (isnan (result) == 0)
+        {
+          printf ("%f\n", result);
+        }
 
-  if (feof (stdin_or_f))
-    {
-      exit (0);
+      if (feof (stdin_or_f) != 0)
+        {
+          exit (0);
+        }
+      break;
     }
+  return result;
 }

@@ -37,7 +37,11 @@ main (int argc, char **argv)
     }
   while (true)
     {
-      perform_calculation (stdin_or_f);
+      perform_calculation (stdin_or_f, 1);
+      if (feof (stdin_or_f) != 0)
+        {
+          break;
+        }
     }
   return 0;
 }

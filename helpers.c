@@ -8,7 +8,7 @@ handle_args (char *argv1, FILE *stdin_or_f, char *argv0)
 {
   if (strcmp (argv1, "--test") == 0)
     {
-      int result = test_cicalc (argv0);
+      int result = test_cicalc ();
 
       if (result == 1)
         {

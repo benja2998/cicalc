@@ -1,186 +1,94 @@
 #include "test.h"
+#include "helpers.h"
+#include "math.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int
-test_cicalc (const char *argv0)
+void
+test_fail (double expected, double result)
 {
-  char s[1024];
-  FILE *fptr;
-  int add_failed = 0;
-  int sub_failed = 0;
-  int mul_failed = 0;
-  int div_failed = 0;
-  int nrt_failed = 0;
-  int pow_failed = 0;
+  printf ("\033[31mfail! expected %f, got %f\033[0m\n", expected, result);
+}
+
+void
+test_pass (void)
+{
+  printf ("\033[32mpass\033[0m\n");
+}
+
+int
+run_a_test (char *test, char *exp, double expected)
+{
+  FILE *fptr = NULL;
+  double result = 0;
+
+  printf ("Testing %s (script: %s)...\t\t", test, exp);
+
+  fptr = fopen ("cicalc_script", "w+");
+
+  fprintf (fptr, "%s", exp);
+
+  fclose (fptr);
+
+  fptr = fopen ("cicalc_script", "r");
+
+  result = perform_calculation (fptr, 0);
+
+  if (result == expected)
+    {
+      test_pass ();
+      return 0;
+    }
+  else
+    {
+      test_fail (expected, result);
+      return 1;
+    }
+}
+
+int
+test_cicalc (void)
+{
   int exit_code = 0;
 
-  setenv ("CICALC", argv0, 1);
-
-  printf ("Testing add...\t\t");
-
-  system ("echo \"add 5.5 5.5\" | \"$CICALC\" > cicalc.results_test");
-
-  fptr = fopen ("cicalc.results_test", "r");
-  if (fptr == NULL)
+  if (run_a_test ("add", "add 5.5 5.5", 11) != 0)
     {
-      fprintf (stderr, "[ERROR]: file can't be opened");
-      return 1;
-    }
-
-  fscanf (fptr, "%[^\n]", s);
-  if (strcmp (s, "11.000000") != 0)
-    {
-      add_failed = 1;
       exit_code = 1;
     }
 
-  if (add_failed == 0)
+  if (run_a_test ("sub", "sub 5.5 .5", 5) != 0)
     {
-      printf ("\033[32mpass\033[0m\n");
-    }
-  else
-    {
-      printf ("\033[31mfail! expected 11.000000, got %s\033[0m\n", s);
-    }
-
-  printf ("Testing sub...\t\t");
-
-  system ("echo \"sub 5.5 .5\" | \"$CICALC\" > cicalc.results_test");
-
-  fptr = fopen ("cicalc.results_test", "r");
-  if (fptr == NULL)
-    {
-      fprintf (stderr, "[ERROR]: file can't be opened");
-      return 1;
-    }
-
-  fscanf (fptr, "%[^\n]", s);
-  if (strcmp (s, "5.000000") != 0)
-    {
-      sub_failed = 1;
       exit_code = 1;
     }
 
-  if (sub_failed == 0)
+  if (run_a_test ("mul", "mul 2.5 2", 5) != 0)
     {
-      printf ("\033[32mpass\033[0m\n");
-    }
-  else
-    {
-      printf ("\033[31mfail! expected 5.000000, got %s\033[0m\n", s);
-    }
-
-  printf ("Testing mul...\t\t");
-
-  system ("echo \"mul 2.5 2\" | \"$CICALC\" > cicalc.results_test");
-
-  fptr = fopen ("cicalc.results_test", "r");
-  if (fptr == NULL)
-    {
-      fprintf (stderr, "[ERROR]: file can't be opened");
-      return 1;
-    }
-
-  fscanf (fptr, "%[^\n]", s);
-  if (strcmp (s, "5.000000") != 0)
-    {
-      mul_failed = 1;
       exit_code = 1;
     }
 
-  if (mul_failed == 0)
+  if (run_a_test ("mul", "mul 5.5 pi", 5.5 * acos (-1.0)) != 0)
     {
-      printf ("\033[32mpass\033[0m\n");
-    }
-  else
-    {
-      printf ("\033[31mfail! expected 5.000000, got %s\033[0m\n", s);
-    }
-
-  printf ("Testing div...\t\t");
-
-  system ("echo \"div 5 2.5\" | \"$CICALC\" > cicalc.results_test");
-
-  fptr = fopen ("cicalc.results_test", "r");
-  if (fptr == NULL)
-    {
-      fprintf (stderr, "[ERROR]: file can't be opened");
-      return 1;
-    }
-
-  fscanf (fptr, "%[^\n]", s);
-  if (strcmp (s, "2.000000") != 0)
-    {
-      div_failed = 1;
       exit_code = 1;
     }
 
-  if (div_failed == 0)
+  if (run_a_test ("div", "div 5 2.5", 2) != 0)
     {
-      printf ("\033[32mpass\033[0m\n");
-    }
-  else
-    {
-      printf ("\033[31mfail! expected 2.000000, got %s\033[0m\n", s);
-    }
-
-  printf ("Testing nrt...\t\t");
-
-  system ("echo \"nrt 25 2\" | \"$CICALC\" > cicalc.results_test");
-
-  fptr = fopen ("cicalc.results_test", "r");
-  if (fptr == NULL)
-    {
-      fprintf (stderr, "[ERROR]: file can't be opened");
-      return 1;
-    }
-
-  fscanf (fptr, "%[^\n]", s);
-  if (strcmp (s, "5.000000") != 0)
-    {
-      nrt_failed = 1;
       exit_code = 1;
     }
 
-  if (nrt_failed == 0)
+  if (run_a_test ("nrt", "nrt 25 2", 5) != 0)
     {
-      printf ("\033[32mpass\033[0m\n");
-    }
-  else
-    {
-      printf ("\033[31mfail! expected 5.000000, got %s\033[0m\n", s);
-    }
-
-  printf ("Testing pow...\t\t");
-
-  system ("echo \"pow 5 2\" | \"$CICALC\" > cicalc.results_test");
-
-  fptr = fopen ("cicalc.results_test", "r");
-  if (fptr == NULL)
-    {
-      fprintf (stderr, "[ERROR]: file can't be opened");
-      return 1;
-    }
-
-  fscanf (fptr, "%[^\n]", s);
-  if (strcmp (s, "25.000000") != 0)
-    {
-      pow_failed = 1;
       exit_code = 1;
     }
 
-  if (pow_failed == 0)
+  if (run_a_test ("pow", "pow 5 2", 25) != 0)
     {
-      printf ("\033[32mpass\033[0m\n");
-    }
-  else
-    {
-      printf ("\033[31mfail! expected 25.000000, got %s\033[0m\n", s);
+      exit_code = 1;
     }
 
-  remove ("cicalc.results_test");
+  remove ("cicalc_script");
 
   return exit_code;
 }

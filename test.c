@@ -35,6 +35,7 @@ run_a_test (char *test, char *exp, double expected)
   fptr = fopen ("cicalc_script", "r");
 
   result = perform_calculation (fptr, 0);
+  fclose (fptr);
 
   if (result == expected)
     {

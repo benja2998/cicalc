@@ -1,8 +1,5 @@
 * cicalc: C Interactive CALCulator
 cicalc is an interactive calculator written in C. It can handle decimals due to it using ~double~.
-** Motivation
-GNU bc is the common tool used for calculations. Unfortunately, it is thousands of lines of code and includes a whole scripting language.
-Other alternatives like GNOME Calculator require running a heavy graphical interface. Calculators don't have to be this complex, so I decided I could make better software than these people.
 ** Running
 Run ~make~ to compile it and ~make install~ to install it.
 ** Syntax
@@ -27,5 +24,5 @@ Will quit cicalc.
 Run ~cicalc --help~ to view usage
 ** Scripting
 Just pipe a command into cicalc. A script file can also be provided as an argument.
-** About the limitations
-While this software certainly has more limitations than ~bc~, it works very well for the kind of simple decimal math shell scripts actually use ~bc~ for.
+** Benefits over ~bc~
+Unlike bc, cicalc is a much simpler codebase and does not include a whole scripting language.

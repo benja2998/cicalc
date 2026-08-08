@@ -4,5 +4,5 @@ shopt -s extglob
 shopt -s globstar
 set -euo pipefail
 
-ctags *.[ch] /usr/include/*.h
-ctags -e *.[ch] /usr/include/*.h
+ctags *.[ch] /${PREFIX:-usr}/include/*.h
+ctags -e *.[ch] /${PREFIX:-usr}/include/*.h

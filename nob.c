@@ -16,6 +16,11 @@ main (int argc, char **argv)
     }
 
   NOB_GO_REBUILD_URSELF (argc, argv);
+  Nob_Cmd tags = { 0 };
+
+  nob_cmd_append (&tags, "bash", "gen_tags");
+  if (!nob_cmd_run (&tags))
+    return 1;
 
   if (strcmp (argv[1], "install-sys") == 0)
     {
